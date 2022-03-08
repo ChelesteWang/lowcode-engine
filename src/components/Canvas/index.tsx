@@ -1,16 +1,17 @@
-import React from 'react';
-import { CodeTreeState, ComNodeSchema } from '../../redux/codeTreeSlice';
-import Frame from 'react-frame-component';
-import DndFrame from './DndFrame';
-import DndComponent from './DndComponent';
+import React from "react";
+import { CodeTreeState, ComNodeSchema } from "../../redux/codeTreeSlice";
+import Frame from "react-frame-component";
+import DndFrame from "./DndFrame";
+import DndComponent from "./DndComponent";
 
 interface Props {
+  mode?: string;
   codeTree: CodeTreeState;
   onEndDrop: Function;
   onNodeFocused: Function;
 }
 
-const Canvas = ({ codeTree, onEndDrop, onNodeFocused }: Props) => {
+const Canvas = ({ mode, codeTree, onEndDrop, onNodeFocused }: Props) => {
   const renderTree = (node: ComNodeSchema, parentId: string): any => {
     return (
       <>
@@ -47,9 +48,11 @@ const Canvas = ({ codeTree, onEndDrop, onNodeFocused }: Props) => {
     </body>
     </html>`}
         mountTarget="body"
-        style={{ width: '100%', height: '100%', border: '0' }}
+        style={{ width: "100%", height: "100%", border: "0" }}
       >
-        <DndFrame>{renderTree(codeTree.root, '')}</DndFrame>
+        {mode === "edit" ? (
+          <DndFrame>{renderTree(codeTree.root, "")}</DndFrame>
+        ) : null}
       </Frame>
     </>
   );

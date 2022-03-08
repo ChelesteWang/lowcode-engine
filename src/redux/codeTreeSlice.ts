@@ -61,11 +61,14 @@ const initialState: CodeTreeState = {
 
     ],
   },
+
   comDiagrams: [
     {
       id: 'root',
       type: 'input',
-      data: { label: '开始' },
+      data: {
+        label: '开始',
+      },
       position: { x: 0, y: 50 },
       sourcePosition: 'right',
     },
@@ -77,7 +80,9 @@ const initialState: CodeTreeState = {
       targetPosition: 'right',
     }
   ],
-  comRef: {},
+  comRef: {
+
+  },
   comManifests: []
 }
 

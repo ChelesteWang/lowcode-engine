@@ -1,7 +1,8 @@
-import React from 'react';
+import { Card } from "@arco-design/web-react";
+import React from "react";
 
-const Inspector = () => {
-  return <></>;
+const Inspector = ({}: any) => {
+  return <Card title="" bordered={false}></Card>;
 };
 
 export default Inspector;

@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react';
-import { useDrag, useDrop } from 'react-dnd';
-import { ComNodeSchema } from '../../redux/codeTreeSlice';
-import RemoteComponent from './RemoteComponent';
+import React, { useRef, useState } from "react";
+import { useDrag, useDrop } from "react-dnd";
+import { ComNodeSchema } from "../../redux/codeTreeSlice";
+import RemoteComponent from "./RemoteComponent";
 
 interface Props {
   node: ComNodeSchema;
@@ -22,10 +22,10 @@ const DndComponent = ({
 }: Props) => {
   const ref = useRef<HTMLElement | null>(null);
 
-  const [hoverPosition, setHoverPosition] = useState('');
+  const [hoverPosition, setHoverPosition] = useState("");
 
   const [{ isDragging }, drag] = useDrag({
-    type: 'ITEM',
+    type: "ITEM",
     // 用于描述拖动源的普调JS对象s
     item: () => ({ id: node.id, type: node.type, parentId }),
     // 收集功能，用来收集属性，返回一个JS对象，并且返回值会合并到你的组件属性中
@@ -35,20 +35,20 @@ const DndComponent = ({
     }),
     end: (draggedItem, monitor) => {
       const dropResult: any = monitor.getDropResult();
-      console.log('dropResult', dropResult);
+      console.log("dropResult", dropResult);
       if (dropResult.dragItem && dropResult.overItem) {
         const { dragItem, overItem } = dropResult;
         onEndDrop(dragItem, overItem);
       }
     },
     canDrag: () => {
-      return node.id !== 'root';
+      return node.id !== "root";
     },
   });
 
   const [{ isOver }, drop] = useDrop({
     // 一个字符串，这个放置目标只会对指定类型的拖动源发生反应
-    accept: 'ITEM',
+    accept: "ITEM",
     collect: (monitor) => ({
       isOver: monitor.isOver(),
     }),
@@ -67,12 +67,12 @@ const DndComponent = ({
       const { x, y } = monitor.getClientOffset() as any; // event.clientY
       const hoverClientY = y - top,
         hoverClientX = x - left;
-      console.log('hover', ref.current?.id, halfOfHoverHeight, hoverClientY);
+      // console.log('hover', ref.current?.id, halfOfHoverHeight, hoverClientY);
       //  console.log("hover", ref.current?.id, halfOfHoverHeight, hoverClientY);
       if (hoverClientY > halfOfHoverHeight) {
-        setHoverPosition('bottom');
+        setHoverPosition("bottom");
       } else {
-        setHoverPosition('top');
+        setHoverPosition("top");
       }
       // if (node.props.layout && node.props.layout === "flex-column") {
 
@@ -86,7 +86,7 @@ const DndComponent = ({
     },
     drop: (item, monitor) => {
       const didDrop = monitor.didDrop();
-      console.log('drop', item, monitor, didDrop);
+      console.log("drop", item, monitor, didDrop);
       if (didDrop) {
         return undefined;
       }
@@ -132,7 +132,7 @@ const DndComponent = ({
 
   return (
     <>
-      {node.id === 'root' ? (
+      {node.id === "root" ? (
         React.createElement(node.type, {
           ...node.props,
           key: node.id,

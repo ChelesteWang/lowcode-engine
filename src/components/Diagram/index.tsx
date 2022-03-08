@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import ReactFlow, { Controls, MiniMap } from 'react-flow-renderer';
+import React, { useEffect, useState } from "react";
+import ReactFlow, { Controls, MiniMap } from "react-flow-renderer";
 
 interface Props {
   elements: any[];
@@ -17,9 +17,9 @@ const Diagram = ({ elements, onConnect }: Props) => {
   }, [reactflowInstance, elements.length]);
 
   return (
-    <div style={{ width: '100%', height: 300 }}>
+    <div style={{ width: "100%", height: 300 }}>
       <ReactFlow
-        style={{ background: '#1A192B' }}
+        style={{ background: "#1A192B" }}
         elements={elements}
         defaultZoom={1}
       >
