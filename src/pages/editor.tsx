@@ -22,6 +22,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import Inspector from "../components/Inspector";
 import Canvas from "../components/Canvas";
 import Diagram from "../components/Diagram";
+import Test from "../components/Test";
 
 const Header = Layout.Header;
 const Sider = Layout.Sider;
@@ -71,6 +72,16 @@ const EditorPage = () => {
   const setElements = () => {};
 
   const onConnect = (params: any) => {};
+
+  const props = {
+    text: null,
+  };
+
+  const changeText = () => {
+    props.text = function (fn, ...args) {
+      return fn(111, ...args);
+    };
+  };
 
   return (
     <Layout style={{ width: "100%", height: "100%" }}>
@@ -134,7 +145,18 @@ const EditorPage = () => {
           resizeDirections={["right"]}
           style={{ minWidth: 150, maxWidth: 500 }}
         >
-          {}
+          <Button
+            onClick={() => {
+              changeText();
+            }}
+          >
+            Button
+          </Button>
+          <Test
+            inputs={{
+              ...props,
+            }}
+          />
         </Sider>
         <Layout>
           <Content
